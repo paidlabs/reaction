@@ -20,7 +20,7 @@ module Reaction
         name = type.to_s.split('_').map(&:capitalize).join
         const_get("#{name}Type")
       rescue NameError
-        raise ArgumentError.new("Unknown param type: #{type}")
+        nil
       end
     end
 

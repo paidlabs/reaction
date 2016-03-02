@@ -10,7 +10,7 @@ module Reaction
 
     module ClassMethods
       def param(name, options = {})
-        set_type(name, options.delete(:type))
+        set_type(name, options.delete(:type) || RawType)
         set_validators(name, options)
       end
     end

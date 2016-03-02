@@ -2,6 +2,7 @@ module Reaction
   class Action
     include HasErrors
     include HasParams
+    include HasAttributes
 
     # meta isn't used by default, but it is supported for use cases
     # where you need to attach metadata to parameters, such as
@@ -32,6 +33,12 @@ module Reaction
     end
 
     def validate!
+      validate_attributes!
+      params.each do |name, value|
+        unless self.class.class_for_type(name)
+          errors.add(name, 'is not a valid parameter.')
+        end
+      end
       self.class.types.each do |name, type|
         type.validate_each(self, name, raw_param(name))
       end
