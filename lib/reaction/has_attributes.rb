@@ -15,8 +15,16 @@ module Reaction
       end
     end
 
+    def set_attributes(attributes = {})
+      attributes.each do |key, value|
+        if self.class.attributes.include?(key)
+          send("#{key}=", value)
+        end
+      end
+    end
+
     def validate_attributes
-      attributes.each do |attribute|
+      self.class.attributes.each do |attribute|
         errors.add(attribute, 'is not set.') unless send(attribute)
       end
     end

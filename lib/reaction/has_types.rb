@@ -5,13 +5,17 @@ module Reaction
     end
 
     module ClassMethods
+      def type(name)
+        types[name.to_sym]
+      end
+
       def types
         @types ||= {}
       end
 
       def set_type(name, type)
         type ||= Type
-        klass = class_for_type(type)
+        klass = class_for_type!(type)
         types[name.to_sym] = klass.new(name)
       end
 
@@ -22,6 +26,20 @@ module Reaction
       rescue NameError
         nil
       end
+
+      def class_for_type!(type)
+        class_for_type(type) or raise ArgumentError.new("Unknown type: #{type}")
+      end
+
+      def cleanup_types
+        types.each do |name, type|
+          type.cleanup
+        end
+      end
+    end
+
+    def cleanup_types
+      self.class.cleanup_types
     end
 
   end

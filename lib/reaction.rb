@@ -3,6 +3,7 @@ module Reaction
   autoload :Doc, 'reaction/doc'
   autoload :EachValidator, 'reaction/each_validator'
   autoload :Errors, 'reaction/errors'
+  autoload :HasAttributes, 'reaction/has_attributes'
   autoload :HasDocs, 'reaction/has_docs'
   autoload :HasErrors, 'reaction/has_errors'
   autoload :HasMetas, 'reaction/has_metas'
