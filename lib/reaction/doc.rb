@@ -5,12 +5,15 @@
 #
 module Reaction
   class Doc
-    attr_reader :message, :options
+    attr_reader :text, :options
 
-    def initialize(message, options = {})
-      @message = message
+    def initialize(text, options = {})
+      @text = text
       @options = options
     end
 
+    def to_html(formatter = Markdown)
+      formatter.render(text)
+    end
   end
 end

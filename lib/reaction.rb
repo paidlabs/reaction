@@ -1,3 +1,5 @@
+require 'redcarpet'
+
 module Reaction
   autoload :Action, 'reaction/action'
   autoload :Doc, 'reaction/doc'
@@ -11,6 +13,7 @@ module Reaction
   autoload :HasTypes, 'reaction/has_types'
   autoload :HasValidators, 'reaction/has_validators'
   autoload :IsDocumented, 'reaction/is_documented'
+  autoload :Markdown, 'reaction/markdown'
   autoload :RawType, 'reaction/types/raw_type'
   autoload :Type, 'reaction/type'
 end

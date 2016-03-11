@@ -48,7 +48,7 @@ module Reaction
       ret = []
       values ||= messages[key]
       values.each do |value|
-        ret << "Invalid value for param: #{key}. #{value.capitalize}"
+        ret << "Invalid value for param: #{key}. #{value}"
       end
       ret
     end
