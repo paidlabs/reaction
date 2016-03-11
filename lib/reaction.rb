@@ -10,6 +10,7 @@ module Reaction
   autoload :HasParams, 'reaction/has_params'
   autoload :HasTypes, 'reaction/has_types'
   autoload :HasValidators, 'reaction/has_validators'
+  autoload :IsDocumented, 'reaction/is_documented'
   autoload :RawType, 'reaction/types/raw_type'
   autoload :Type, 'reaction/type'
 end

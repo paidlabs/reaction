@@ -5,10 +5,9 @@
 #
 module Reaction
   class Doc
-    attr_reader :name, :message, :options
+    attr_reader :message, :options
 
-    def initialize(name, message, options = {})
-      @name = name.to_sym
+    def initialize(message, options = {})
       @message = message
       @options = options
     end

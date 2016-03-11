@@ -28,6 +28,10 @@ module Reaction
       messages.any?
     end
 
+    def first
+      messages.first
+    end
+
     def each
       messages
     end
@@ -35,9 +39,16 @@ module Reaction
     def full_messages
       ret = []
       messages.each do |key, values|
-        values.each do |value|
-          ret << "#{key}: #{value}"
-        end
+        ret |= full_messages_for(key, values)
+      end
+      ret
+    end
+
+    def full_messages_for(key, values = nil)
+      ret = []
+      values ||= messages[key]
+      values.each do |value|
+        ret << "Invalid value for param: #{key}. #{value.capitalize}"
       end
       ret
     end

@@ -61,8 +61,9 @@ module Reaction
     def validate_params
       raw_params.each do |name, value|
         self.class.type(name).validate_each(self, name, value)
+        converted = param(name)
         self.class.validators(name).each do |validator|
-          validator.validate_each(self, name, value)
+          validator.validate_each(self, name, converted)
         end
       end
     end

@@ -1,5 +1,7 @@
 module Reaction
   class Type
+    include IsDocumented
+
     attr_reader :name
 
     def initialize(name)
@@ -35,6 +37,16 @@ module Reaction
     # properly.
     #
     def cleanup
+    end
+
+    # This isn't perfect but works well enough.
+    def self.to_type_symbol
+      ret = self.to_s
+      ret.gsub!(/([A-Z]+)([A-Z])/, '\1_\2')
+      ret.gsub!(/([a-z])([A-Z])/, '\1_\2')
+      ret.downcase!
+      ret.gsub!(/_type$/, '')
+      ret.to_sym
     end
   end
 end

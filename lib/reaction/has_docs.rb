@@ -6,7 +6,7 @@ module Reaction
 
     module ClassMethods
       def doc(name, message, options = {})
-        docs[name.to_sym] = Doc.new(name, message, options)
+        docs[name.to_sym] = Doc.new(message, options)
       end
 
       def docs

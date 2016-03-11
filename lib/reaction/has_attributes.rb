@@ -7,11 +7,20 @@ module Reaction
     module ClassMethods
       def attribute(name)
         attr_accessor name
+        eval(getter_code(name))
         attributes << name
       end
 
       def attributes
         @attributes ||= []
+      end
+
+      def getter_code(name)
+        <<-CODE
+        def #{name}
+          self.#{name}
+        end
+CODE
       end
     end
 
