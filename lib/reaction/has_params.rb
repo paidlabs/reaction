@@ -38,6 +38,13 @@ module Reaction
       @typed_params ||= {}
     end
 
+    def rm_param(name)
+      ret = param(name)
+      rm_meta(name)
+      raw_params.delete(name.to_sym)
+      ret
+    end
+
     def set_param(name, value, meta = {})
       return unless self.class.param_settable?(name)
       set_meta(name, meta)

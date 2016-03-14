@@ -15,6 +15,10 @@ module Reaction
       @metas ||= {}
     end
 
+    def rm_meta(name)
+      metas.delete(name.to_sym)
+    end
+
     def set_meta(name, meta)
       metas[name.to_sym] = meta
     end
