@@ -28,6 +28,18 @@ module Reaction
       messages.any?
     end
 
+    def empty?
+      messages.empty?
+    end
+
+    def size
+      messages.size
+    end
+
+    def length
+      messages.length
+    end
+
     def first
       messages.first
     end
@@ -48,7 +60,11 @@ module Reaction
       ret = []
       values ||= messages[key]
       values.each do |value|
-        ret << "Invalid value for param: #{key}. #{value}"
+        if key != :base
+          ret << "Invalid value for param: #{key}. #{value}"
+        else
+          ret << value
+        end
       end
       ret
     end

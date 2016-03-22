@@ -4,8 +4,8 @@ module Reaction
 
     attr_reader :name
 
-    def initialize(name)
-      @name = name.to_sym
+    def initialize(name = nil)
+      @name = name.nil? ? nil : name.to_sym
     end
 
     # If you need to validate based on type you can. These

@@ -24,6 +24,14 @@ CODE
       end
     end
 
+    def attributes
+      ret = {}
+      self.class.attributes.each do |name|
+        ret[name] = send(name)
+      end
+      ret
+    end
+
     def set_attributes(attributes = {})
       attributes.each do |key, value|
         if self.class.attributes.include?(key)

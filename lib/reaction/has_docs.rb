@@ -14,5 +14,9 @@ module Reaction
       end
     end
 
+    def doc(name)
+      self.class.docs[name.to_sym]
+    end
+
   end
 end
