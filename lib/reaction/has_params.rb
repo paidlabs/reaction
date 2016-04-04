@@ -19,6 +19,10 @@ module Reaction
       end
     end
 
+    def param_provided?(name)
+      raw_params.has_key?(name.to_sym)
+    end
+
     def param(name)
       typed_params[name.to_sym] ||= begin
         type = self.class.types[name.to_sym]
