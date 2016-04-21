@@ -19,7 +19,7 @@ module Reaction
       messages[key]
     end
 
-    def add(key, message)
+    def add(key, message, options = {})
       messages[key] ||= []
       messages[key] << message
     end
