@@ -1,5 +1,22 @@
 module Reaction
   module HasParams
+
+    def set_params(param_values)
+      param_values.each do |name, raw_value|
+        builder = self.class.param_builder(name)
+        builder.build(self, name, raw_value)
+      end
+    end
+
+    def process_params
+      params.each do |param|
+        return false unless param.process
+      end
+    end
+
+
+
+
     def self.included(base)
       base.include HasDocs
       base.include HasMetas

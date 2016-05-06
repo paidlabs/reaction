@@ -1,40 +1,44 @@
-module Reaction
+amodule Reaction
   class Type
-    include IsDocumented
+    attr_accessor :action
+    attr_accessor :options
 
-    attr_reader :name
-    attr_reader :options
+    attr_accessor :result
+    attr_accessor :error
+    attr_accessor :successful
 
-    def initialize(name = nil, options = {})
-      @name = name.nil? ? nil : name.to_sym
+    def initialize(action, options = {})
+      @action = action
       @options = options
+      @successful = nil
     end
 
-    # If you need to validate based on type you can. These
-    # work identically to the validators, except type validations
-    # are always called before other validators.
-    #
-    def validate_each(action, attribute, value)
+    def process(raw_value)
+      convert(raw_value)
+      raise "You forgot to call success or failure!!!" if @successful.nil?
+      @successful
     end
 
-    # Convert is used to transform a value into whatever
-    # format you expect it to be. For example, you might
-    # have a convert method that casts a string into an
-    # integer, or one that takes in various date formats
-    # and converts them to a DateTime prior to the param
-    # being used in the action.
-    #
-    def convert(action, attribute, value)
-      value
+    def convert(raw_value)
+      raise NotImplementedError
     end
 
-    # Cleanup is provided in case you need to create files that
-    # require cleanup after the action has been performed. For
-    # example, Paid creates Tempfiles with some types and uses
-    # the cleanup phase to ensure these files get closed up
-    # properly.
-    #
-    def cleanup
+    def successful?
+      @successful == true
+    end
+
+    def success(result)
+      @successful = true
+      @result = result
+    end
+
+    def failed?
+      @successful == false
+    end
+
+    def failure(error)
+      @successful = false
+      @error = error
     end
 
     # This isn't perfect but works well enough.

@@ -42,7 +42,11 @@ CODE
 
     def validate_attributes
       self.class.attributes.each do |attribute|
-        errors.add(attribute, 'is not set.') unless send(attribute)
+        unless send(attribute)
+          # This is a server side error - we didn't set a valid attribute
+          # for some reason, and attributes are things the server sets.
+          failure(AttributeError.new(attribute)) and return false
+        end
       end
     end
 
