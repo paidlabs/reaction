@@ -3,20 +3,18 @@ module Reaction
     include IsDocumented
 
     attr_reader :name
+    attr_reader :options
 
-    def initialize(name = nil)
+    def initialize(name = nil, options = {})
       @name = name.nil? ? nil : name.to_sym
+      @options = options
     end
 
     # If you need to validate based on type you can. These
     # work identically to the validators, except type validations
-    # are always called before other validators, and the +options+
-    # hash isn't available. If you have a particularly good
-    # use case for passing in options to a Type reach out; It
-    # should be pretty easy to add in, we just haven't had a
-    # need for it yet.
+    # are always called before other validators.
     #
-    def validate_each(record, attribute, value)
+    def validate_each(action, attribute, value)
     end
 
     # Convert is used to transform a value into whatever
@@ -26,7 +24,7 @@ module Reaction
     # and converts them to a DateTime prior to the param
     # being used in the action.
     #
-    def convert(value)
+    def convert(action, attribute, value)
       value
     end
 

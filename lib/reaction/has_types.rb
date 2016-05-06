@@ -13,10 +13,10 @@ module Reaction
         @types ||= {}
       end
 
-      def set_type(name, type)
+      def set_type(name, type, options = {})
         type ||= Type
         klass = class_for_type!(type)
-        types[name.to_sym] = klass.new(name)
+        types[name.to_sym] = klass.new(name, options)
       end
 
       def class_for_type(type)

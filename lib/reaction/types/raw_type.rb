@@ -3,10 +3,10 @@
 #
 module Reaction
   class RawType < Type
-    def validate_each(record, attribute, value)
+    def validate_each(action, attribute, value)
     end
 
-    def convert(value)
+    def convert(action, attribute, value)
       value
     end
 

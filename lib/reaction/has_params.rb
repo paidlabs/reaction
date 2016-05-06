@@ -10,12 +10,15 @@ module Reaction
 
     module ClassMethods
       def param(name, options = {})
-        set_type(name, options.delete(:type) || RawType)
-        set_validators(name, options)
+        set_type(name, options.delete(:type) || RawType, options)
       end
 
       def param_settable?(name)
         !type(name).nil?
+      end
+
+      def validates(name, options = {})
+        set_validators(name, options)
       end
     end
 
@@ -26,7 +29,7 @@ module Reaction
     def param(name)
       typed_params[name.to_sym] ||= begin
         type = self.class.types[name.to_sym]
-        type.convert(raw_param(name))
+        type.convert(self, name, raw_param(name))
       end
     end
 
@@ -72,6 +75,9 @@ module Reaction
     def validate_params
       raw_params.each do |name, value|
         self.class.type(name).validate_each(self, name, value)
+      end
+      return if errors.any?
+      raw_params.each do |name, value|
         converted = param(name)
         self.class.validators(name).each do |validator|
           validator.validate_each(self, name, converted)

@@ -43,6 +43,10 @@ module Reaction
       end
     end
 
+    def class_for_validator(validator)
+      self.class.class_for_validator(validator)
+    end
+
     def cleanup_validators
       self.class.cleanup_validators
     end

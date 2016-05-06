@@ -8,10 +8,11 @@ module Reaction
 
     # If you need to validate a parameter outside of the basic
     # type then validators are your best bet. They are generally
-    # very similar to Rails' EachValidator. You provide a
-    # validate_each method that takes in a record, attribute, and
+    # very similar to Rails' EachValidator, but instead of the first
+    # argument being a record it is an action. You provide a
+    # validate_each method that takes in a action, attribute, and
     # value and then if the attribute isn't valid adds an error
-    # to record.errors. You can also access the data provided
+    # to action.errors. You can also access the data provided
     # for the validator via the +options+ method.
     #
     # Example validate_each method for a RequiredValidator which
@@ -21,14 +22,14 @@ module Reaction
     #  param :dog, required: false
     #
     #
-    #  def validate_each(record, attribute, value)
+    #  def validate_each(action, attribute, value)
     #    if options && value.nil?
-    #      record.errors.add(attribute, 'is required.')
+    #      action.errors.add(attribute, 'is required.')
     #    end
     #  end
     #
-    def validate_each(record, attribute, value)
-      raise NotImplementedError.new('Subclasses must implement a validate_each(record, attribute, value) method')
+    def validate_each(action, attribute, value)
+      raise NotImplementedError.new('Subclasses must implement a validate_each(action, attribute, value) method')
     end
 
     # Cleanup is provided in case you need to create files that
