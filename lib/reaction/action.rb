@@ -44,10 +44,14 @@ module Reaction
       end
     end
 
-    def params
+    def params(mode = :converted)
       ret = {}
       _params.each do |name, param|
-        ret[name] = param.result
+        if mode == :raw
+          ret[name] = param.raw_value if param_provided?
+        else
+          ret[name] = param.result if param.provided?
+        end
       end
       ret
     end
