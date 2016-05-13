@@ -48,7 +48,7 @@ module Reaction
       ret = {}
       _params.each do |name, param|
         if mode == :raw
-          ret[name] = param.raw_value if param_provided?
+          ret[name] = param.raw_value if param.provided?
         else
           ret[name] = param.result if param.provided?
         end
@@ -57,8 +57,10 @@ module Reaction
     end
 
     def set_params(param_values = {})
+      provided_keys = param_values.keys.map(&:to_sym)
+
       self.class.param_builders.each do |name, pb|
-        provided = param_values.keys.include?(name)
+        provided = provided_keys.include?(name)
         _params[name] = pb.build(self, param_values[name], provided)
       end
     end

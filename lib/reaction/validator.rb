@@ -25,5 +25,9 @@ module Reaction
       @error = error
     end
 
+    def failed?
+      @successful == false
+    end
+
   end
 end

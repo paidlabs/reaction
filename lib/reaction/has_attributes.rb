@@ -12,7 +12,18 @@ module Reaction
       end
 
       def attributes
-        @attributes ||= []
+        if self == Reaction::Action
+          @attributes ||= []
+        else
+          @attributes ||= begin
+            attrs = superclass.attributes
+            if attrs.respond_to?(:deep_dup)
+              attrs.deep_dup
+            else
+              attrs.dup
+            end
+          end
+        end
       end
 
       def getter_code(name)
@@ -48,6 +59,12 @@ CODE
           failure(AttributeError.new(attribute)) and return false
         end
       end
+    end
+
+    private
+
+    def deep_dup(hash = {})
+
     end
 
   end

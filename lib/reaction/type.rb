@@ -41,6 +41,16 @@ module Reaction
       @error = error
     end
 
+    def validate_with(validator, options, value)
+      v = ValidatorBuilder.new(validator, options).build(action)
+      v.process(value)
+      if v.failed?
+        failure(v.error)
+        return false
+      end
+      true
+    end
+
     # This isn't perfect but works well enough.
     def self.to_type_symbol
       ret = self.to_s
@@ -50,5 +60,6 @@ module Reaction
       ret.gsub!(/_type$/, '')
       ret.to_sym
     end
+
   end
 end
