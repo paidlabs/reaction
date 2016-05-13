@@ -1,4 +1,4 @@
-amodule Reaction
+module Reaction
   class Type
     attr_accessor :action
     attr_accessor :options
