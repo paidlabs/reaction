@@ -23,23 +23,26 @@ module Reaction
       if type.process(raw_value)
         validators.each do |validator|
           unless validator.process(type.result)
-            failure(validator.error) and return false
+            failure(validator.error)
+            return false
           end
         end
       else
-        failure(type.error) and return false
+        failure(type.error)
+        return false
       end
-      success(type.result) and return true
+      success(type.result)
+      true
     end
 
     def success(result)
-      @successful = true
       @result = result
+      @successful = true
     end
 
     def failure(error)
-      @successful = false
       @error = ParamError.new(name, error)
+      @successful = false
     end
 
     def provided?

@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |gem|
   gem.name          = 'reaction'
-  gem.version       = '1.0.5'
+  gem.version       = '1.0.6'
   gem.authors       = ["Jon Calhoun", "Jon Calhoun", "Ryan Jackson"]
   gem.email         = ["joncalhoun@gmail.com", "jon@paidlabs.com", "ryan@paidlabs.com"]
   gem.description   = 'Reaction makes it easy to build reusable controller actions along with reusable validators and param type converters.'

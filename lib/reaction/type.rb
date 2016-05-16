@@ -28,8 +28,8 @@ module Reaction
     end
 
     def success(result)
-      @successful = true
       @result = result
+      @successful = true
     end
 
     def failed?
@@ -37,8 +37,8 @@ module Reaction
     end
 
     def failure(error)
-      @successful = false
       @error = error
+      @successful = false
     end
 
     def validate_with(validator, options, value)

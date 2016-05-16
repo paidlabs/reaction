@@ -15,7 +15,8 @@ module Reaction
       return false unless validate_attributes
       _params.each do |name, param|
         unless param.process
-          failure(param.error) and return false
+          failure(param.error)
+          return false
         end
       end
       perform
@@ -23,13 +24,17 @@ module Reaction
     end
 
     def success(result)
-      @successful = true
       @result = result
+      @successful = true
     end
 
     def failure(error)
-      @successful = false
       @error = error
+      @successful = false
+    end
+
+    def failed?
+      @successful == false
     end
 
     # This is how you retrieve a param. Pass in a mode of :raw in

@@ -21,8 +21,8 @@ module Reaction
     end
 
     def failure(error)
-      @successful = false
       @error = error
+      @successful = false
     end
 
     def failed?

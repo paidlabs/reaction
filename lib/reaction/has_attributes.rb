@@ -56,7 +56,8 @@ CODE
         unless send(attribute)
           # This is a server side error - we didn't set a valid attribute
           # for some reason, and attributes are things the server sets.
-          failure(AttributeError.new(attribute)) and return false
+          failure(AttributeError.new(attribute))
+          return false
         end
       end
     end
