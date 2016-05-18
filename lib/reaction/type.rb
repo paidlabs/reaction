@@ -51,6 +51,16 @@ module Reaction
       true
     end
 
+    def process_subtype(raw_value, type_sym, options = {}, error = nil)
+      type = Reaction::TypeBuilder.new(type_sym, options).build(action)
+      if !type.process(raw_value)
+        failure(error || type.error)
+        nil
+      else
+        type.result
+      end
+    end
+
     # This isn't perfect but works well enough.
     def self.to_type_symbol
       ret = self.to_s
